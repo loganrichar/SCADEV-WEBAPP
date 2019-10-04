@@ -1,0 +1,39 @@
+
+<h1><small class="fg-blue">{{this.facility.facilityName}}</small></h1>
+<h1><small class="fg-blue">Week of: {{this.selectedDate}}</small></h1>
+    <table class="table row-hover striped" >
+        <thead>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        
+        </thead>
+        <tbody>
+            <tr *ngFor="let EmployeeInfo of this.bindableLocationData">
+                <td>{{EmployeeInfo.teammateType}}</td>
+                <td>{{EmployeeInfo.teammateName}}</td>
+                <td>{{EmployeeInfo.monday}}</td>
+                <td>{{EmployeeInfo.tuesday}}</td>
+                <td>{{EmployeeInfo.wednesday}}</td>
+                <td>{{EmployeeInfo.thursday}}</td>
+                <td>{{EmployeeInfo.friday}}</td>
+                <td>{{EmployeeInfo.saturday}}</td>
+                <td>{{EmployeeInfo.sunday}}</td>
+                </tr>
+        </tbody>
+    </table>
+    <ul class="pagination">
+            <li class="page-item service mx-auto"><a (click)="lastWeek()" class="page-link">< Previous</a></li>
+            <li class="page-item service mx-auto"><a (click)="nextWeek(event)" class="page-link">Next ></a></li>
+        </ul>
+    
+
+        

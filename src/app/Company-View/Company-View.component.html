@@ -1,0 +1,61 @@
+<div *ngIf="!this.showTable">
+  <div class="grid" style="width:95vw;">
+    <div class="row">
+      <div class="cell-8">
+        <h1 class="display3">Week of: {{this.PickedDate}} </h1>
+      </div>
+      <div class="cell-2">
+        <div class="pos-relative"><input [(ngModel)]="PickedDate" type="text" data-role="calendarpicker" data-format="%m %d %Y" (change)="SetDate($event)"></div>
+      </div>
+      <div class="cell-2">
+        <div class="pos-relative"><button class="button dropdown-toggle">Locations</button>
+          <ul class="d-menu" data-role="dropdown">
+            <li (click)="setLocation($event, Location)" *ngFor="let Location of this.bindableLocations">
+              <a>{{Location.facilityName}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell-10">
+        <div class="d-flex flex-content-start flex-wrap">
+          <div data-role="tile" [ngStyle]="{'background-color': !Location.Selected ? '#03A7E6' : 'white'} "
+            data-size="wide" [id]="Location.facilityId" class="mr-1 ml-1 mt-1 mb-1 border bd-gray"
+            *ngFor="let Location of this.bindableLocations" (click)="setLocation($event, Location)">
+            <div class="card-header" [ngStyle]="{'color': !Location.Selected ? 'white' : '#03A7E6'} ">
+              {{Location.facilityName}}
+            </div>
+            <div class="card-content">
+              <span>
+                <p class="fg text-center" [ngStyle]="{'color': !Location.Selected ? 'white' : '#03A7E6'} ">Facility ID:
+                  {{Location.facilityId}}</p>
+                <app-Week-Bar [facilityID]="Location.facilityId" [date]="this.PickedDate"></app-Week-Bar>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="button primary outline" (click)="LastWeek()">Last Week</div>
+      <div class="button  primary outline offset-10" (click)="NextWeek()">Next Week</div>
+    </div>
+  </div>
+</div>
+<div class="grid" *ngIf="this.showTable">
+  <div class="row">
+      <div class=" cell-1">
+          <div  (click)="this.showTable = false; DeselectDate(); this.LoadDate();" class="pos-relative button primary outline">Home</div>
+      </div>
+      <div class="cell-3">
+          <div class="pos-relative"><input [(ngModel)]="PickedDate" type="text" data-role="calendarpicker" data-format="%m %d %Y" (change)="SetDate($event)"></div>
+      </div>
+      
+  <div class="row">
+    
+    <div class='cell-10'>
+      <app-Selected-Company-Calendar-View  [selectedDate]="this.PickedDate"
+        [facility]=this.selectedLocation></app-Selected-Company-Calendar-View>
+    </div>
+  </div>
+</div>
